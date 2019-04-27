@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Stock Manager</string>
+    <string name="stock">Stock</string>
+    <string-array name="categories_array">
+        <item>Cat 1</item>
+        <item>Cat 2</item>
+        <item>Cat 3</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_store">Store</string>
+    <string name="tab_stock">Stock</string>
+</resources>
