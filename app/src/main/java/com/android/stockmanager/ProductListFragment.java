@@ -53,6 +53,4 @@ public class ProductListFragment extends Fragment {
         productRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
-
-
 }

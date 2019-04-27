@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ProductListFragment currentFragment;
 
-    private PopupMenu popupMenu;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,20 +98,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void showPopup(View view){
-        popupMenu = new PopupMenu(this, view);
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.menu_actions, popupMenu.getMenu());
-        popupMenu.show();
 
-        //set the click listener for the popup menu
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-
-                Toast.makeText(getApplicationContext(), menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
-    }
 }
