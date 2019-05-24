@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class AddProductsActivity extends AppCompatActivity {
     private TextView productName;
@@ -13,7 +12,7 @@ public class AddProductsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_products);
-        productName = findViewById(R.id.text_product_name);
+        productName = findViewById(R.id.text_dialog_product_name);
     }
 
     //called when the add button is pressed

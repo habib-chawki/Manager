@@ -1,7 +1,10 @@
 package com.android.stockmanager;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,10 +24,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private LinkedList<String> products;
     private LayoutInflater inflater;
     private PopupMenu popupMenu;
+    private Context context;
 
     public ProductListAdapter(Context context, LinkedList<String> products){
         this.products = products;
         inflater = LayoutInflater.from(context);
+        this.context = context;
     }
 
     @NonNull
@@ -63,7 +68,14 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                                 break;
                                 //show the details of a given product
                             case R.id.menu_item_details:
-                                Toast.makeText(productViewHolder.itemView.getContext(), "Details Clicked " + productPosition, Toast.LENGTH_SHORT).show();
+                                //Create a bundle to send to the DetailsDialog to show the appropriate product name
+                                Bundle bundle = new Bundle();
+                                bundle.putString("productName", products.get(productPosition));
+
+                                //Create the dialog to show the product details
+                                DetailsDialog detailsDialog = new DetailsDialog();
+                                detailsDialog.setArguments(bundle);
+                                detailsDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "details");
                                 break;
                                 //edit the information of a product
                             case R.id.menu_item_edit:
