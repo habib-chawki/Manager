@@ -14,15 +14,15 @@ import android.widget.Toast;
 
 public class DetailsDialog extends DialogFragment {
 
-    private Bundle bundle;
+    private Bundle detailsBundle;
     private TextView productNameTextView;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
-        bundle = getArguments();
-        String productName = bundle.getString("productName");
+        detailsBundle = getArguments();
+        String productName = detailsBundle.getString("productName");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 

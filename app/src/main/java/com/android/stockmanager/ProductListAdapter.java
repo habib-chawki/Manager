@@ -3,20 +3,16 @@ package com.android.stockmanager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.LinkedList;
 
@@ -25,6 +21,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     private LayoutInflater inflater;
     private PopupMenu popupMenu;
     private Context context;
+    private Bundle detailsBundle, editBundle;
 
     public ProductListAdapter(Context context, LinkedList<String> products){
         this.products = products;
@@ -61,25 +58,36 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
                         int productPosition = productViewHolder.getAdapterPosition();
                         //check which button was clicked
                         switch(menuItem.getItemId()){
-                            //delete a product from the list
+
+                            //Delete a product from the list
                             case R.id.menu_item_delete:
                                 products.remove(productPosition);
                                 notifyItemRemoved(productPosition);
                                 break;
-                                //show the details of a given product
-                            case R.id.menu_item_details:
-                                //Create a bundle to send to the DetailsDialog to show the appropriate product name
-                                Bundle bundle = new Bundle();
-                                bundle.putString("productName", products.get(productPosition));
 
-                                //Create the dialog to show the product details
+                                //Show the details of a given product
+                            case R.id.menu_item_details:
+                                //Send product information to the dialog
+                                detailsBundle = new Bundle();
+                                detailsBundle.putString("productName", products.get(productPosition));
+
+                                //Create the details dialog to show the product details
                                 DetailsDialog detailsDialog = new DetailsDialog();
-                                detailsDialog.setArguments(bundle);
+                                detailsDialog.setArguments(detailsBundle);
                                 detailsDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "details");
                                 break;
-                                //edit the information of a product
+
+                                //Edit the information of a product
                             case R.id.menu_item_edit:
-                                Toast.makeText(productViewHolder.itemView.getContext(), "Edit Clicked " + productPosition, Toast.LENGTH_SHORT).show();
+
+                                //Send product name to the edit dialog
+                                editBundle = new Bundle();
+                                editBundle.putString("productName", products.get(productPosition));
+
+                                //Create the edit dialog to edit the product information
+                                EditDialog editDialog = new EditDialog();
+                                editDialog.setArguments(editBundle);
+                                editDialog.show(((FragmentActivity) context).getSupportFragmentManager(), "edit");
                                 break;
                         }
                         return true;
